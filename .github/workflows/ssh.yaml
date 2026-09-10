@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: |
-        curl -sL https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-amd64.tar.xz \
-          | tar xJ --strip-components=1
-        timeout 60 ./tmate -F -v || echo "tmate.io injoignable"
+    - uses: lhotari/action-upterm@v1
+      with:
+        limit-access-to-actor: true
+        wait-timeout-minutes: 10
