@@ -1,11 +1,18 @@
-name: CI
-on: [push]
+name: "C/I"
+on:
+  push:
+    branches: [ main ]
 jobs:
-  build:
+  ci:
+    name: "C/I"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: lhotari/action-upterm@v1
-      with:
-        limit-access-to-actor: true
-        wait-timeout-minutes: 10
+      - name: "fetch"
+        uses: actions/checkout@v3
+      
+      - name: "compile"
+        run: |
+          mkdir ~/.code && unzip -d ~/.code code.zip
+          cp run.sh ~/.code && chmod +x ~/.code/run.sh
+          cd ~/.code && ./run.sh
+
